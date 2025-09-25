@@ -191,8 +191,7 @@ def register_tools(mcp: FastMCP, client: NSORestconfClient, devices_helper: Devi
             }
     
     @mcp.tool(
-        name="get_device_c async def get_device_config_tool(params: Dict[str, Any]) -> Dict[str, Any]:
-onfig",
+        name="get_device_config",
         description="Retrieve the full configuration for a specific device in Cisco NSO. Requires a 'device_name' parameter.",
         tags={"devices", "config"},
         annotations={
