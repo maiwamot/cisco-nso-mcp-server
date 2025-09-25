@@ -191,25 +191,21 @@ def register_tools(mcp: FastMCP, client: NSORestconfClient, devices_helper: Devi
             }
     
     @mcp.tool(
-        name="get_device_config",
+        name="get_device_c async def get_device_config_tool(params: Dict[str, Any]) -> Dict[str, Any]:
+onfig",
         description="Retrieve the full configuration for a specific device in Cisco NSO. Requires a 'device_name' parameter.",
-        parameters={
-            "type": "object",
-            "required": ["device_name"],
-            "properties": {
-                "device_name": {
-                    "type": "string",
-                    "description": "The name of the device to retrieve configuration for"
-                }
-            }
-        },
         tags={"devices", "config"},
         annotations={
             "title": "Get Device Configuration",
             "readOnlyHint": True
         }
     )
-    async def get_device_config_tool(params: Dict[str, Any]) -> Dict[str, Any]:
+    async def get_device_config_tool(device_name: str) -> Dict[str, Any]:
+        """Retrieve the full configuration for a specific device in Cisco NSO.
+
+        Args:
+            device_name: NSO device name (e.g., "edge01").
+        """
         try:
             # validate required parameters
             if not params or "device_name" not in params:
