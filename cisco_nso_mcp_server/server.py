@@ -193,6 +193,16 @@ def register_tools(mcp: FastMCP, client: NSORestconfClient, devices_helper: Devi
     @mcp.tool(
         name="get_device_config",
         description="Retrieve the full configuration for a specific device in Cisco NSO. Requires a 'device_name' parameter.",
+        parameters={
+            "type": "object",
+            "required": ["device_name"],
+            "properties": {
+                "device_name": {
+                    "type": "string",
+                    "description": "The name of the device to retrieve configuration for"
+                }
+            }
+        },
         tags={"devices", "config"},
         annotations={
             "title": "Get Device Configuration",
