@@ -206,15 +206,15 @@ def register_tools(mcp: FastMCP, client: NSORestconfClient, devices_helper: Devi
             device_name: NSO device name (e.g., "edge01").
         """
         try:
-            # validate required parameters
-            if not params or "device_name" not in params:
+            # validate required parameter
+            if not device_name:
                 return {
                     "status": "error",
                     "error_message": "Missing required parameter: device_name"
                 }
             
             # delegate to the service layer
-            return await get_device_config(devices_helper, params["device_name"])
+            return await get_device_config(devices_helper, device_name)
                 
         except Exception as e:
             return {
