@@ -95,10 +95,14 @@ class LoggerFactory:
         Returns:
             A configured logger instance
         """
+        # Check for LOG_LEVEL environment variable
+        env_log_level = os.environ.get("LOG_LEVEL")
+        if env_log_level:
+            log_level = env_log_level
         return cls.__create_logger(name, log_level)
 
 # create a default logger for simple imports
-default_logger = LoggerFactory.get_logger("server", "INFO")
+default_logger = LoggerFactory.get_logger("server")
 
 # log where logs are being sent
 log_file_path = os.environ.get("LOG_FILE")
@@ -106,3 +110,10 @@ if log_file_path:
     default_logger.info(f"Logging to file: {log_file_path}")
 else:
     default_logger.info("Logging to stdout only (no LOG_FILE environment variable set)")
+
+# log the current log level
+env_log_level = os.environ.get("LOG_LEVEL")
+if env_log_level:
+    default_logger.info(f"Using log level from environment: {env_log_level}")
+else:
+    default_logger.info("Using default log level: INFO")
